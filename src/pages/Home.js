@@ -32,8 +32,8 @@ export default function Home() {
 
                     {
                         users.map((user, index) => (
-                            <tr>
-                                <th scope="row" key = {index}> {index + 1}</th>
+                            <tr key = {index}>
+                                <th scope="row" > {index + 1}</th>
                                 <td>{user.email}</td>
                                 <td>{user.password}</td>
                                 <td>
