@@ -49,7 +49,6 @@ export default function EditUser() {
                             <input type= {"text"} className= "form-control" placeholder= "Enter your password" name = "password"
                                    value={password} onChange={(e)=> onInputChange(e)}/>
                         </div>
-
                         <button type="submit" className= "btn btn-outline-primary">Submit</button>
                         <Link  className= "btn btn-danger mx-2" to = "/">Cancel</Link>
 

@@ -1,0 +1,9 @@
+
+.container_main{
+    min-height: 169px;
+    display: flex;
+    justify-content: center;
+}
+.container_dashboard{
+    width: 85%;
+}
