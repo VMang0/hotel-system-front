@@ -1,0 +1,14 @@
+.container-add-manager{
+    min-height: 580px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+}
+
+.container-add-manager-window{
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+}

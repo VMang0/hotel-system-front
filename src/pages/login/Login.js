@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from "../../contexts/authContext";
 import "./Login.css"
 
@@ -34,25 +34,15 @@ export function Login(){
                 {error && <div>{error}</div>}
                 <div>
                     <label>Email:</label>
-                    <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+                    <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
                 <div>
                     <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <Link to = "/registration">Регистрация </Link>
         </div>
     );
 };

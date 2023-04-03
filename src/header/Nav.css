@@ -108,5 +108,8 @@ nav.navbar {
 .link:hover{
     color: #B3B3B3;
     border-bottom: 1px solid;
+}
 
+.link.active {
+    border-bottom: 1px solid;
 }

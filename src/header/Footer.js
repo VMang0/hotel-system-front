@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Link} from "react-router-dom";
-import logo from "../img/logo.png";
+import logo from "../css_all/img/logo.png";
 import {TfiLocationPin, TfiTime, TfiEmail} from 'react-icons/tfi';
 import {SlPhone} from 'react-icons/sl'
 import './Footer.css';
