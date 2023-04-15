@@ -1,0 +1,171 @@
+.container-view-room{
+
+}
+
+.name-room-details{
+    width: 60%;
+    font-family: Montserrat;
+    font-size: 35px;
+    text-align: left;
+    padding: 20px 0;
+    color: #F3F1F1;
+    font-weight: bold;
+}
+.container-for-images{
+    width: 60%;
+    height: 100%;
+}
+
+.container-for-images img{
+    width: 100%;
+    height: 100%;
+}
+
+.container-details-room-info{
+    width: 60%;
+    margin: 40px 0;
+}
+.header-details-room-info{
+    font-family: Montserrat;
+    font-size: 35px;
+    text-align: left;
+    padding: 20px 0;
+    color: #F3F1F1;
+}
+.details-room-info2{
+    display: flex;
+    justify-content: center;
+}
+.details-room-info{
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: 25px 0;
+}
+.parts-of-details-info p{
+    line-height: 1.3;
+    font-family: Montserrat;
+    margin: 15px 0 0 0;
+    font-size: 25px;
+    color: #919192;
+}
+.text-icon-bed{
+    width: 180px;
+}
+
+.icon-room-details{
+    font-size: 50px;
+    color: #b3b3b3;
+}
+
+.description{
+    padding: 15px 0;
+    width: 100%;
+    height: 250px;
+    font-size: 20px;
+    text-align: left;
+    line-height: 1.5;
+    font-family: Montserrat;
+    color: #F3F1F1;
+}
+
+/**/
+.form-img-and-request{
+    display: flex;
+    justify-content: space-between;
+    height: 500px;
+}
+.container-for-request{
+    border: 1px solid #F3F1F1;
+    width: 35%;
+    height: 500px;
+    padding: 20px;
+}
+
+/**/
+.header-request{
+    text-align: left;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    font-size: 23px;
+}
+
+.calendars{
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.calendars input{
+    height: 50px;
+    width: 180px;
+}
+
+.main-forms-counters{
+    padding: 0 0 0 10px ;
+}
+
+.form-counter{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.input-counter{
+    appearance: none;
+    background-color: #F3F1F1;
+    width: 70px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: center;
+}
+.counter input:active, .counter input:hover, .counter input:focus{
+    outline: 0;
+}
+.button-counter{
+    border: none;
+    height: 100%;
+    width: 55px;
+    margin: 0;
+    padding: 0;
+}
+.person-name{
+    display: flex;
+    align-items: center;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    font-size: 18px;
+}
+.form-for-meals{
+    margin-top: 30px;
+}
+.select_meals{
+    width: 100%;
+    height: 40px;
+}
+
+.checkbox_clean{
+    width: 30px;
+    height: 30px;
+}
+
+.form-for-clean{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    font-size: 18px;
+}
+.form-for-clean span{
+    margin-right: 10px;
+}
+.container-button-request{
+    margin-top: 20px;
+}
+.btn-request{
+    width: 100%;
+    height: 50px;
+}
