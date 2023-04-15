@@ -7,7 +7,7 @@ import './Footer.css';
 import {FaGithubAlt, FaInstagram, FaTelegramPlane} from "react-icons/fa";
 export function Footer() {
     return (
-            <div className="container">
+            <div className="container-footer">
                 <div className="footer_top">
                     <div className="left_content">
                         <div className="logo">

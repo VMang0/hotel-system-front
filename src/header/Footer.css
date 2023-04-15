@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Red+Hat+Display&display=swap');
+.container-footer{
 
-.container{
-    width: 85%;
 }
 .footer_top{
     display: flex;
