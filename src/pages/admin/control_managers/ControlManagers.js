@@ -87,7 +87,7 @@ export default function ControlUsers() {
             {showModal && (
                     <div className="modal_window">
                         <div className="modal_main">
-                            <p>Вы уверены, что хотите удалить<br></br>данного менеджера?</p>
+                            <p className="question">Вы уверены, что хотите удалить<br></br>данного менеджера?</p>
                             <div className="modal_buttons">
                                 <button className="btn btn-secondary" onClick={handleCancelDelete}>
                                     Cancel

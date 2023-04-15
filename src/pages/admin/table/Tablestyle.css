@@ -1,0 +1,27 @@
+
+.tableFooter {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons {
+    background-color: #121212;
+    color: #b3b3b3;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.activeButton {
+    border: 1px solid #dfbf5e;
+    color: #dfbf5e;
+}
+
+.inactiveButton:hover {
+    border: 1px solid #dfbf5e;
+    color: #b3b3b3;
+}
