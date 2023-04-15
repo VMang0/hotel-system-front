@@ -1,0 +1,5 @@
+iframe {
+    filter: grayscale(100%);
+    width: 600px;
+    height: 500px;
+}
