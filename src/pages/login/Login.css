@@ -1,2 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Red+Hat+Display&display=swap');
 
+.log_page_sign_in{
+    border-bottom: 1px solid #DFBF5E;
+}
+.log_page_sign_up{
+    border-bottom: 1px solid;
+}
+
+.btn-login{
+    border-width: 1px;
+    margin-top: 15px;
+    background-color: #121212;
+    border-color: #DFBF5E;
+    padding: 5px 10px;
+    font-family: Montserrat;
+    color: #F3F1F1;
+    font-size: 15px;
+}
+
+.btn-login:hover{
+    background-color: #DFBF5E;
+    border-color: #DFBF5E;
+    color: #121212;
+}
+
+
