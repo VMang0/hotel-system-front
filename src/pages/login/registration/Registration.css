@@ -1,0 +1,44 @@
+.reg_page_sign_in{
+    border-bottom: 1px solid;
+}
+
+.reg_page_sign_up{
+    border-bottom: 1px solid #DFBF5E;
+}
+
+.form-for-getcode{
+    display: flex;
+    justify-content: flex-start;
+}
+.link_verification{
+    text-decoration: none;
+    left: 0;
+    font-size: 11px;
+    color: #DFBF5E;
+    transition: color 0.3s ease-in-out;
+}
+
+.link_verification:hover{
+    color: #7f7f7f;
+}
+
+.ver_code_input.error{
+    border-color: #990000;
+}
+
+.btn-reg{
+    border-width: 1px;
+    margin-top: 15px;
+    background-color: #121212;
+    border-color: #DFBF5E;
+    padding: 5px 10px;
+    font-family: Montserrat;
+    color: #F3F1F1;
+    font-size: 15px;
+}
+
+.btn-reg:hover{
+    background-color: #DFBF5E;
+    border-color: #DFBF5E;
+    color: #121212;
+}
