@@ -62,9 +62,9 @@ export function Nav() {
                 <div className="left_navbar">
                     <ul className="list_icon">
                         <li><p className="link_style">+375(44)7339153</p></li>
-                        <li><button className="icon_btn instagram" ><FaInstagram /></button></li>
-                        <li><button className="icon_btn github" ><FaGithubAlt /></button></li>
-                        <li><button className="icon_btn telegram"><FaTelegramPlane /></button></li>
+                        <li><button className="icon_btn instagram"  aria-label="Instagram"><FaInstagram /></button></li>
+                        <li><button className="icon_btn github"  aria-label="GitHub"><FaGithubAlt /></button></li>
+                        <li><button className="icon_btn telegram"  aria-label="Telegram"><FaTelegramPlane /></button></li>
                     </ul>
                 </div>
                 <Link className="center_navbar" to = "/"><p className="white_text">VMANGO</p></Link>
