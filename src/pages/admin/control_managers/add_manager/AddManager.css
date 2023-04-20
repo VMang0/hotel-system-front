@@ -1,14 +1,12 @@
 .container-add-manager{
-    min-height: 580px;
+    height: calc(100vh - 140px);
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: #121212;
+    margin: 50px;
 }
 
 .container-add-manager-window{
-    display: flex;
-    justify-content: center;
+    border: 1px solid #DFBF5E;
     width: 400px;
-    height: 400px;
+    height: 350px;
 }
