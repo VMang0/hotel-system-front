@@ -11,7 +11,7 @@ export function Footer() {
                 <div className="footer_top">
                     <div className="left_content">
                         <div className="logo">
-                            <img src={logo}></img>
+                            <img src={logo} alt="logo"></img>
                             <Link to="/" className="logo_text">VMANGO</Link>
                         </div>
                         <div className="left_content_top">
@@ -52,9 +52,9 @@ export function Footer() {
                             <li className="last_links">
                                 <p>Следите за нами в соцсетях: </p>
                                 <ul className="buttons_link">
-                                    <li className="icons_footer_seti"><button className="btn_seti" ><FaInstagram /></button></li>
-                                    <li className="icons_footer_seti"><button className="btn_seti" ><FaGithubAlt /></button></li>
-                                    <li className="icons_footer_seti"><button className="btn_seti"><FaTelegramPlane /></button></li>
+                                    <li className="icons_footer_seti"><button className="btn_seti" aria-label="Instagram"><FaInstagram /></button></li>
+                                    <li className="icons_footer_seti"><button className="btn_seti" aria-label="GitHub" ><FaGithubAlt /></button></li>
+                                    <li className="icons_footer_seti"><button className="btn_seti" aria-label="Telegram"><FaTelegramPlane /></button></li>
                                 </ul>
                             </li>
                         </ul>
