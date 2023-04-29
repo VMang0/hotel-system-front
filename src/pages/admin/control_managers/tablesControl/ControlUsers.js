@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
-import BackFon from "./backfon/BackFon";
-import useTable from "../table/useTable";
-import TableFooter from "../table/TableFooter";
+import BackFon from "../backfon/BackFon";
+import useTable from "./table/useTable";
+import TableFooter from "./table/TableFooter";
+import {FaUserMinus} from "react-icons/fa";
 
 export default function ControlUsers() {
     const [users, setUsers] = useState([])
@@ -13,7 +14,7 @@ export default function ControlUsers() {
 
 
     const [page, setPage] = useState(1);
-    const { slice, range } = useTable(users, page, 8);
+    const { slice, range } = useTable(users, page, 9);
 
     useEffect(()=>{
         loadUsers();
@@ -67,8 +68,10 @@ export default function ControlUsers() {
                                     <td><p className="table_text">{user.email}</p></td>
                                     <td><p className="table_text">{user.roles[0]}</p></td>
                                     <td>
-                                    <button className= "btn btn-danger mx-2" onClick={()=> deleteUser(user.id)}>Delete</button>
-                                </td>
+                                        <div className="form-for-btn-dashboard">
+                                            <button className= "dashboard-btn btn-delete-user" onClick={()=> deleteUser(user.id)}><FaUserMinus/></button>
+                                        </div>
+                                    </td>
                                 </tr>
                             ))
                         }

@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Red+Hat+Display&display=swap');
 .container_admin{
-    min-height: 580px;
-    display: flex;
-    justify-content: center;
     background-color: #121212;
 }
 
 .admin_table{
     margin-top: 10px;
-    width: 84%;
     align-items: center;
 }
 
 table{
     --bs-border-color: none;
+}
+.table{
+    margin: 0;
+}
+.cont_table{
+    min-height: 480px;
 }
 th{
     font-size: 17px;
@@ -24,37 +26,43 @@ td{
     vertical-align: middle;
 }
 .table_text{
-    text-color: #F3F1F1;
+    font-size: 15px;
+    margin: 0;
+    color: #b0b0b0;
 }
 
 .number{
+    margin: 0;
     color: #DFBF5E;
     font-size: 18px;
 }
 
-p{
-    margin: 0;
-    color: #B3B3B3;
+.question{
+    color: #F3F1F1;
 }
-
 /*/////////////////*/
 
 .modal_window{
-    z-index: 100;
-    display: flex;
     width: 100%;
     height: 100%;
+    z-index: 100;
     position: fixed;
-    justify-content: center;
-    margin-top: 110px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal_main{
+    z-index: 110;
     height: 150px;
     width: 300px;
     border: 1px solid #990000;
     background-color: rgba(255, 0, 0, 0.2);;
     padding: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .modal_buttons{
@@ -92,5 +100,47 @@ p{
 
 .btn_add:hover{
     background-color: #b89425;
-    color: #4285B4;
+}
+
+.test{
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    position: fixed;
+    background-color: #990000;
+}
+.form-for-btn-dashboard{
+    display: flex;
+    justify-content: center;
+}
+.form-for-btn-dashboard2{
+   width: 105px;
+    display: flex;
+    justify-content: space-between;
+}
+.dashboard-btn{
+    height: 33px;
+    width: 50px;
+    border: 1px solid #DFBF5E;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+.btn-edit-user{
+    background-color: #1f1f1f;
+    color: #b0b0b0;
+    transition: background-color 0.3s ease;
+}
+.btn-edit-user:hover{
+    background-color: #121212;
+}
+.btn-delete-user{
+    background-color: #DFBF5E;
+    transition: background-color 0.3s ease;
+}
+.btn-delete-user:hover{
+    background-color: #b89425;
+    border-color: #b89425;;
 }

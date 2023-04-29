@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import '../../../css_all/all.css'
+import '../../../../css_all/all.css'
 import './Control.css'
-import BackFon from "./backfon/BackFon";
+import BackFon from "../backfon/BackFon";
 import {IoPersonAddSharp} from 'react-icons/io5'
-
+import {FaUserMinus, FaUserEdit} from "react-icons/fa";
 export default function ControlUsers() {
     const [users, setUsers] = useState([]);
     let navigate = useNavigate();
@@ -21,12 +21,6 @@ export default function ControlUsers() {
         const result = await axios.get("http://localhost:8080/managerlist");
         setUsers(result.data);
     }
-
-    /*const deleteUser = async (id) =>{
-        await axios.delete(`http://localhost:8080/user/${id}`)
-
-        loadUsers();
-    }*/
 
     const deleteUser = async (id) => {
         setSelectedUser(id);
@@ -74,9 +68,12 @@ export default function ControlUsers() {
                                     <td><p className="table_text">{user.email}</p></td>
                                     <td><p className="table_text">{user.roles[0]}</p></td>
                                     <td>
-                                        {/*<Link className= "btn btn-primary" to = {`/viewuser/${user.id}`}>View</Link>*/}
-                                        <Link className= "btn btn-outline-primary" to={`/edituser/${user.id}`}>Edit</Link>
-                                        <button className= "btn btn-danger" onClick={()=> deleteUser(user.id)}>Delete</button>
+                                        <div className="form-for-btn-dashboard">
+                                            <div className="form-for-btn-dashboard2">
+                                                <button className= "dashboard-btn btn-edit-user" onClick={() => navigate(`/edituser/${user.id}`)}><FaUserEdit/></button>
+                                                <button className= "dashboard-btn btn-delete-user" onClick={()=> deleteUser(user.id)}><FaUserMinus/></button>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
