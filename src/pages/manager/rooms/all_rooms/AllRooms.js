@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import "./AllRooms.css"
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {BiArea} from "react-icons/bi";
 import {IoBedOutline} from "react-icons/io5";
 import {SlPeople} from "react-icons/sl";
@@ -9,13 +9,13 @@ import noFoto from "../../../../css_all/img/nophoto.png";
 import {MdDeleteOutline, MdOutlineEdit} from "react-icons/md";
 import BackFon from "../../../admin/control_managers/backfon/BackFon";
 import {AuthContext} from "../../../../contexts/authContext";
-import useTable from "../../../admin/table/useTable";
-import TableFooter from "../../../admin/table/TableFooter";
+import useTable from "../../../admin/control_managers/tablesControl/table/useTable";
+import TableFooter from "../../../admin/control_managers/tablesControl/table/TableFooter";
 export default function AllRooms(){
 
     const [rooms, setRoom] = useState([]);
     const [firstRoomImage, setFirstRoomImage] = useState({});
-    const {authData, setAuthData} = useContext(AuthContext);
+    const {authData} = useContext(AuthContext);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedRoom, setSelectedRoom] = useState(null);
@@ -95,7 +95,7 @@ export default function AllRooms(){
                                     {
                                         authData && authData.roles[0] === 'MANAGER' ? (
                                             <div className="manager-tools">
-                                                <button className="manager-tools-btn"><MdOutlineEdit/></button>
+                                                <Link className="manager-tools-btn" to={`/editroom/${room.id}`}><MdOutlineEdit/></Link>
                                                 <button className="manager-tools-btn" onClick={()=> deleteRoom(room.id)}><MdDeleteOutline/></button>
                                             </div>
                                         ): ""
