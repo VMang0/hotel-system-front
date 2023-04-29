@@ -1,12 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Red+Hat+Display&display=swap');
+
+.form-add{
+    margin-top: 50px;
+}
 .container-add-manager{
-    height: calc(100vh - 140px);
     display: flex;
     justify-content: center;
-    margin: 50px;
 }
 
 .container-add-manager-window{
-    border: 1px solid #DFBF5E;
+    margin-top: 30px;
     width: 400px;
-    height: 350px;
+}
+.form-for-cancel{
+    display: flex;
+    justify-content: flex-start;
+}
+.btn-cancel-add-manager{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #DFBF5E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+    color: #DFBF5E;
+    transition: background-color 0.3s ease;
+}
+.btn-cancel-add-manager:hover{
+    background-color: #1f1f1f;
+}
+
+.btn-add-manager{
+    margin-top: 10px;
+    background-color: #121212;
+    border: 1px solid #DFBF5E;
+    height: 35px;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-manager:hover{
+    background-color: #DFBF5E;
+    color: #121212;
 }

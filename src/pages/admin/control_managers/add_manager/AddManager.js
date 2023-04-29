@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import axios from "axios";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "./AddManager.css";
+import {HiOutlineArrowLeft} from "react-icons/hi"
+import {toast} from "react-toastify";
 
 export default function AddManager() {
     let navigate = useNavigate();
@@ -19,31 +21,48 @@ export default function AddManager() {
         try {
             const response = await axios.post("http://localhost:8080/add_manager", user)
             if(response.status === 200){
+                toast.success('Менеджер успешно зарегистрирован!');
                 navigate("/admin/dashboard-manager");
             }
         }catch (error){
-            alert('Ошибка при добавлении менеджера. Пользователь с таким email уже существует!');
+            toast.error('Пользователь с таким email уже существует!');
             console.error(error);
         }
     };
     return (
-        <div className= "container-add-manager">
-            <div className= "container-add-manager-window">
-                <div className= "form-add">
-                    <form onSubmit={(e) => onSubmit(e)}>
-                        <div className="mb-3">
-                            <label htmlFor="Email" className="form-label">Email</label>
-                            <input type= "email" className= "form-control" placeholder= "Enter your email" name = "email"
-                                   value={email} onChange={(e)=> onInputChange(e)} required/>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Password" className="form-label">Password</label>
-                            <input type= "password" className= "form-control" placeholder= "Enter your password" name = "password"
-                                   value={password} onChange={(e)=> onInputChange(e)} required minLength="4" maxLength="20"/>
-                        </div>
-                        <button type="submit" className= "btn btn-outline-primary">Submit</button>
-                        <Link  className= "btn btn-danger mx-2" to = {"/admin/dashboard-manager"}>Cancel</Link>
-                    </form>
+        <div className="main-container-add-manager">
+            <div className="name-page"><span>Регистрация менеджера</span></div>
+            <div className= "container-add-manager">
+                <div className= "container-add-manager-window">
+                    <div className="form-for-cancel">
+                        <button className= "btn-cancel-add-manager" onClick={()=> navigate("/admin/dashboard-manager")}><HiOutlineArrowLeft/></button>
+                    </div>
+                    <div className= "form-add">
+                        <form onSubmit={(e) => onSubmit(e)}>
+                            <div className="input-login">
+                                <input className= "form_login"
+                                       type= "email"
+                                       placeholder= "Email"
+                                       name = "email"
+                                       value={email}
+                                       onChange={(e)=> onInputChange(e)}
+                                       required />
+                                <label className="label-input">Email</label>
+
+                            </div>
+                            <div className="input-login">
+                                <input className= "form_login_pass"
+                                       type= "password"
+                                       placeholder= "Password"
+                                       name = "password"
+                                       value={password}
+                                       onChange={(e)=> onInputChange(e)}
+                                       required minLength="4" maxLength="20"/>
+                                <label className="label-input-pass">Password</label>
+                            </div>
+                            <button type="submit" className= "btn-add-manager">Добавить</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
