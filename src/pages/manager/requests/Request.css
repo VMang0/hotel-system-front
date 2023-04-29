@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Red+Hat+Display&display=swap');
+
+.manager_table{
+    height: 550px;
+}
+.request_table{
+    margin-top: 25px;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.form-for-input-search{
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form-for-input-search input{
+    width: 50%;
+    height: 35px;
+    background-color: #121212;
+    border-width: 0 0 1px 0;
+    border-color: #DFBF5E;
+    color: #F3F1F1;
+    font-size: 15px;
+    font-family: Montserrat;
+}
+
+.form-for-input-search input:active, .form-for-input-search input:hover, .form-for-input-search input:focus{
+    outline: 0;
+}
+/*автозаполнение*/
+.form-for-input-search input:-webkit-autofill,
+.form-for-input-search input:-webkit-autofill:hover,
+.form-for-input-search input:-webkit-autofill:focus,
+.form-for-input-search input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #121212 inset !important;
+}
+
+.form-for-input-search input:-webkit-autofill {
+    -webkit-text-fill-color: #F3F1F1 !important;
+}
+
+.status-select{
+    background-color: #121212;
+    color: #7f7f7f;
+}
+
+.btn-request-table{
+    height: 33px;
+    width: 50px;
+    border: 1px solid #DFBF5E;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.dogovor-request{
+    background-color: #1f1f1f;
+    color: #b0b0b0;
+    transition: background-color 0.3s ease;
+}
+.dogovor-request:hover{
+    background-color: #121212;
+}
+.delete-request{
+    background-color: #DFBF5E;
+    transition: background-color 0.3s ease;
+}
+.delete-request:hover{
+    background-color: #b89425;
+    border-color: #b89425;;
+}
