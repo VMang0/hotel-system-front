@@ -14,6 +14,9 @@ import {AuthContext} from "../../../../contexts/authContext";
 import BackFon from "../../../admin/control_managers/backfon/BackFon";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import {HiMinus, HiPlus} from "react-icons/hi";
+import {toast} from "react-toastify";
+
 export default function ViewRoom(){
     const [room, setRoom] =useState({
         number: "",
@@ -42,7 +45,7 @@ export default function ViewRoom(){
         cost: ""
     });
 
-    const {name, lastname, patronymic, phoneNumber, birthDate, payment} = reservation;
+    let {name, lastname, patronymic, phoneNumber, birthDate, payment} = reservation;
     const {authData} = useContext(AuthContext);
     const [images, setImages] = useState([]);
     const { id } = useParams();
@@ -54,8 +57,10 @@ export default function ViewRoom(){
         timeZone: 'Europe/Minsk',
     });
     formatter.format(currentDate);
-    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-    let tomorrow = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    let today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    let dateReserv = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), currentDate.getHours() + 3, currentDate.getMinutes(), currentDate.getSeconds());
+    let tomorrow = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 2);
+    let maxYear = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate() + 1)
 
     const [initialCost, setInitialCost] = useState(0);
     const [adultsCount, setAdultsCount] = useState(1);
@@ -68,11 +73,10 @@ export default function ViewRoom(){
     const [endDate, setEndDate] = useState(new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate()));
     const [showModal, setShowModal] = useState(false);
     const [showBackFon, setShowBackFon] = useState(false);
+    const [showModalInfo, setShowModalInf0] = useState(false);
+    const [is18, setIs18] = useState(false);
     const navigate = useNavigate();
-    useEffect(()=>{
-        console.log(startDate);
-        console.log(new Date(startDate));
-    }, [startDate])
+
 
     useEffect(()=>{
         axios.get('http://localhost:8080/list/type_meals')
@@ -93,12 +97,7 @@ export default function ViewRoom(){
             .catch(error =>{
                 console.log(error);
             });
-        /*const loadRoom = async () => {
-            const result = await axios.get(`http://localhost:8080/room/${id}`);
-            setRoom(result.data);
-            setInitialCost(result.data.cost);
-        };
-        loadRoom();*/
+
         axios.get(`http://localhost:8080/image/${id}`)
             .then(response =>{
                 setImages(response.data)
@@ -107,16 +106,9 @@ export default function ViewRoom(){
                 console.log(error);
             });
 
-        /*const fetchImages = async ()=>{
-          const result = await axios(`http://localhost:8080/image/${id}`);
-          setImages(result.data)
-        };
-        fetchImages();*/
-
         axios.get(`http://localhost:8080/reservations/dates/${id}`)
             .then(response =>{
                 setreservDate(response.data);
-                console.log(response.data)
             })
             .catch(error =>{
                 console.log(error);
@@ -124,8 +116,6 @@ export default function ViewRoom(){
 
 
     }, [id]);
-
-
 
     useEffect(() => {
         const selectedMeal = type_meals.find(meal => meal.name === selectedMealName);
@@ -176,16 +166,41 @@ export default function ViewRoom(){
     }
 
     const OpenForm = async () => {
-        setShowModal(true);
-        setShowBackFon(true);
-        document.body.style.overflow = 'hidden';
+        if(startDate < endDate){
+            setShowModal(true);
+            setShowBackFon(true);
+            document.body.style.overflow = 'hidden';
+        }else{
+            toast.error('Проверьте корректность введённых дат для бронирования!');
+        }
+
     };
 
     const handleCancel = () => {
         setShowModal(false);
         setShowBackFon(false);
+        setShowModalInf0(false);
         document.body.style.overflow = 'auto';
     };
+
+    const  canselInfo = () => {
+        setShowModal(false);
+        setShowModalInf0(false)
+        navigate("/");
+        document.body.style.overflow = 'auto';
+    };
+
+    useEffect(() => {
+        const today = new Date(maxYear);
+        const dateOfBirth = new Date(birthDate);
+        const ageDiffMs = dateOfBirth.getTime() - today.getTime();
+        if(ageDiffMs <= 0){
+            setIs18(true)
+        }else{
+            setIs18(false)
+        }
+    }, [birthDate]);
+
 
     const handleReservationSubmit = async (e) => {
         e.preventDefault();
@@ -194,6 +209,10 @@ export default function ViewRoom(){
             meals = "Без питания";
         }else{
             meals = selectedMealName;
+        }
+
+        if(payment === ""){
+            payment = "Безналичный";
         }
 
         const start = (startDate.getFullYear() + '-' + ('0' + (startDate.getMonth() + 1)).slice(-2) + '-' + ('0' + startDate.getDate()).slice(-2));
@@ -208,21 +227,24 @@ export default function ViewRoom(){
             payment,
             startdate: start,
             enddate: end,
-            reservdate: today,
+            reservdate: dateReserv,
             type_meal: meals,
             numAdult: adultsCount,
             numChild: childrenCount,
             room: room.id,
             cost: totalCost,
         };
-        console.log(startDate);
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8080/add_reservation", reservationData)
-            setShowModal(false);
-            setShowBackFon(false);
-            document.body.style.overflow = 'auto';
-            navigate("/")
+            if(is18 === true){
+                await axios.post("http://localhost:8080/add_reservation", reservationData)
+                setShowModalInf0(true);
+            }else if (is18 === false){
+                toast.error('Бронь могут осуществлять только лица достигшие 18-ти лет!');
+            }else {
+                toast.error('Проверьте корректность введённых дат для бронирования!');
+            }
+
         }catch (error){
             alert('Ошибка');
             console.error(error);
@@ -231,6 +253,11 @@ export default function ViewRoom(){
     };
 
     const onInputChange = (e)=>{setReservation({...reservation,[e.target.name]: e.target.value});};
+    const handlePaymentChange = (e) => {
+        const payment = e.target.value;
+        setReservation({...reservation, payment: payment});
+    }
+
 
     return (
         <div className= "container-view-room">
@@ -252,11 +279,6 @@ export default function ViewRoom(){
                             <div>
                                 <div className="header-request"><span>Забронировать номер</span></div>
                                 <div className="calendars">
-                                    {/*<input type="date" value={startDate}
-                                           onChange={(e) => setStartDate(e.target.value)}
-                                           aria-label = "start data"
-                                           min={today.toISOString().slice(0,10)}
-                                    />*/}
                                     <DatePicker
                                         selected={startDate}
                                         onChange={date => {
@@ -267,8 +289,10 @@ export default function ViewRoom(){
                                                 setStartDate(date);
                                             }
                                         }}
+
                                         minDate={new Date(today)}
                                         aria-label="start date"
+                                        className="minimal-datepicker"
                                         renderDayContents={(day, date) => {
                                             const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
                                             if (reservDate.includes(dateStr)) {
@@ -278,7 +302,6 @@ export default function ViewRoom(){
                                             }
                                         }}
                                     />
-
                                     <DatePicker
                                         selected={endDate}
                                         onChange={date => {
@@ -290,6 +313,7 @@ export default function ViewRoom(){
                                             }
                                         }}
                                         minDate={new Date(tomorrow)}
+                                        className="minimal-datepicker"
                                         aria-label = "end data"
                                         renderDayContents={(day, date) => {
                                             const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
@@ -300,27 +324,22 @@ export default function ViewRoom(){
                                             }
                                         }}
                                     />
-                                    {/*<input type="date"
-                                           value={endDate}
-                                           onChange={(e) => setEndDate(e.target.value)}
-                                           aria-label = "end data"
-                                           min={tomorrow.toISOString().slice(0,10)}/>*/}
                                 </div>
                                 <div className="main-forms-counters">
                                     <div className="form-counter">
                                         <div className="person-name"><span>Взрослые:</span></div>
                                         <div className="counter">
-                                            <button className="button-counter" onClick={() => handleAdultsCountChange({ target: { value: adultsCount - 1 } })}>-</button>
+                                            <button className="button-counter" onClick={() => handleAdultsCountChange({ target: { value: adultsCount - 1 } })}><HiMinus/></button>
                                             <input type="number" className="input-counter" value={adultsCount} onChange={handleAdultsCountChange} readOnly aria-label = "number adult" min="1" max="10"/>
-                                            <button className="button-counter" onClick={() => handleAdultsCountChange({ target: { value: adultsCount + 1 } })}>+</button>
+                                            <button className="button-counter" onClick={() => handleAdultsCountChange({ target: { value: adultsCount + 1 } })}><HiPlus/></button>
                                         </div>
                                     </div>
                                     <div className="form-counter">
                                         <div className="person-name"><span>Дети (до 3-ёх лет):</span></div>
                                         <div className="counter">
-                                            <button className="button-counter" onClick={() => handleChildrenCountChange({ target: { value: childrenCount - 1 } })}>-</button>
+                                            <button className="button-counter" onClick={() => handleChildrenCountChange({ target: { value: childrenCount - 1 } })}><HiMinus/></button>
                                             <input  type="number" className="input-counter" value={childrenCount} onChange={handleChildrenCountChange} readOnly aria-label = "number child"/>
-                                            <button className="button-counter" onClick={() => handleChildrenCountChange({ target: { value: childrenCount + 1 } })}>+</button>
+                                            <button className="button-counter" onClick={() => handleChildrenCountChange({ target: { value: childrenCount + 1 } })}><HiPlus/></button>
                                         </div>
                                     </div>
                                     <div className="form-for-meals">
@@ -333,10 +352,9 @@ export default function ViewRoom(){
                                         </select>
                                     </div>
                                     <div className="cost">
-                                        <span style={{color: "#fff"}}>Стоимость: </span>
-                                        <span style={{color: "#fff"}}>{totalCost} руб.</span>
+                                        <div className="cost-name"><span>Полная стоимость: </span></div>
+                                        <div><span> {totalCost} бел. руб.</span></div>
                                     </div>
-
                                     {
                                         authData && authData.roles[0] === "USER" ?(
                                             <div className="container-button-request"><button className="btn-request" onClick={()=> OpenForm()}>Забронировать</button></div>
@@ -344,7 +362,6 @@ export default function ViewRoom(){
                                             <div className="container-button-request"><button className="btn-request" disabled>Забронировать</button></div>
                                         )
                                     }
-
                                 </div>
                             </div>
                         </div>
@@ -368,29 +385,71 @@ export default function ViewRoom(){
                     <div className="modal-window-reservation">
                         <div className="modal-main-reservation">
                             <div className="form-for-btn-cancel">
+                                <div className="name-header-form">
+                                    <span>Бронирование</span>
+                                </div>
                                 <button className="btn-cancel" onClick={handleCancel}>X</button>
                             </div>
-                            <div>
-                                <span className="name-header-form">Бронирование</span>
-                            </div>
+
                             <div className="input-form">
-                                <span>Имя</span>
-                                <input type="text" value={name} onChange={(e)=> onInputChange(e)} name="name"/>
-                                <span>Фамилия</span>
-                                <input type="text" value={lastname} onChange={(e)=> onInputChange(e)} name="lastname"/>
-                                <span>Отчество</span>
-                                <input type="text" value={patronymic} onChange={(e)=> onInputChange(e)} name="patronymic"/>
-                                <span>Номер телефона</span>
-                                <input type="text" value={phoneNumber} onChange={(e)=> onInputChange(e)} name="phoneNumber"/>
-                                <span>Дата рождения</span>
-                                <input type="date" value={birthDate} onChange={(e)=> onInputChange(e)} name="birthDate"/>
-                                <span>Вид оплаты</span>
-                                <input type="text" value={payment} onChange={(e)=> onInputChange(e)} name="payment"/>
-                                <button type="submit">Забронировать</button>
+                                <div className="input-form-ones">
+                                    <div className="input-form-ones-label" ><label>Имя</label></div>
+                                    <input type="text" value={name} onChange={(e)=> onInputChange(e)} name="name" minLength="2" maxLength="20" required/>
+                                </div>
+                                <div className="input-form-ones">
+                                    <div className="input-form-ones-label" ><label>Фамилия</label></div>
+                                    <input type="text"  value={lastname} onChange={(e)=> onInputChange(e)} name="lastname" required />
+                                </div>
+                                <div className="input-form-ones">
+                                    <div className="input-form-ones-label" ><label>Отчество</label></div>
+                                    <input type="text"  value={patronymic} onChange={(e)=> onInputChange(e)} name="patronymic" />
+                                </div>
+                                <div className="input-form-ones">
+                                    <div className="input-form-ones-label" ><label>Номер телефона</label></div>
+                                    <input type="tel"  value={phoneNumber} onChange={(e)=> onInputChange(e)} name="phoneNumber" required />
+                                </div>
+                                <div className="input-form-ones">
+                                    <div className="input-form-ones-label" ><label>Дата рождения</label></div>
+                                    <input type="date" value={birthDate} onChange={(e)=> onInputChange(e)} name="birthDate" required />
+                                </div>
+                                <div className="input-form-ones">
+                                    <div className="input-form-ones-label" ><label>Вид оплаты</label></div>
+                                    <div className="input-form-pay">
+                                        <div className="input-form-ones-pay">
+                                            <label>Безналичный</label>
+                                            <input type="radio" name="payment" value="Безналичный" onChange={(e)=> handlePaymentChange(e)} defaultChecked={true}/>
+                                        </div>
+                                        <div className="input-form-ones-pay">
+                                            <label>Наличные</label>
+                                            <input type="radio" name="payment" value="Наличные" onChange={(e)=> handlePaymentChange(e)}/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button className="btn-request-form" type="submit">Забронировать</button>
                             </div>
                         </div>
                     </div>
                 </form>
+            )}
+            {showModalInfo && (
+                    <div className="modal-window-reservation">
+                        <div className="modal-main-reservation">
+                            <div className="form-for-btn-cancel">
+                                <div className="name-header-form">
+                                    <span>Информация</span>
+                                </div>
+                            </div>
+                            <div className="modal-form-info">
+                                <span className="first-text-info">Вы успешно оформили бронь на номер!</span>
+                                <span>В случае, если вы выбрали оплату безналичным платежом - просим вас перейти в ваш Личный кабинет, для оплаты брони.</span>
+                                <span>Если же при выборе способа оплаты вы выбрали наличный вид платежа просим вас приехать и потвердить бронирование.</span>
+                                <span>Предупреждаем! Без оплаты бронь будет действительна в течение 24 часов, далее она будет аннулирована.</span>
+                                <span>Отменить бронирование мы можете также в своём Личном кабинете.</span>
+                                <span className="last-text-info">С уважением, администрация отеля Vmang0!</span>
+                            </div>
+                            <button className="btn-request-form" onClick={()=> canselInfo()}>Понятно</button>
+                        </div>
+                    </div>
             )}
         </div>
     );

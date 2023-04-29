@@ -76,7 +76,8 @@
     height: 500px;
 }
 .container-for-request{
-    border: 1px solid #F3F1F1;
+    box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid;
     width: 35%;
     height: 500px;
     padding: 20px;
@@ -97,35 +98,54 @@
 }
 .calendars input{
     height: 50px;
-    width: 180px;
+    width: 190px;
 }
 
 .form-counter{
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
 }
+.counter{
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .input-counter{
-    appearance: none;
-    background-color: #F3F1F1;
-    width: 70px;
-    height: 100%;
+    //appearance: none;
+    background-color: #121212;
+    border: 1px solid #DFBF5E;
+    width: 55px;
+    height: 90%;
     margin: 0;
     padding: 0;
-    border: none;
     text-align: center;
+    color: #F3F1F1;
+    font-size: 20px;
+    font-family: Montserrat;
 }
 .counter input:active, .counter input:hover, .counter input:focus{
     outline: 0;
 }
 .button-counter{
-    border: none;
-    height: 100%;
-    width: 55px;
+    height: 80%;
+    width: 45px;
     margin: 0;
     padding: 0;
+    background-color: #121212;
+    color: #7f7f7f;
+    font-size: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-counter:hover{
+    background-color: rgba(255, 255, 255, 0.1);
 }
 .person-name{
     display: flex;
@@ -138,32 +158,33 @@
     margin-top: 30px;
 }
 .select_meals{
+    background-color: #121212;
     width: 100%;
-    height: 40px;
-}
-
-.checkbox_clean{
-    width: 30px;
-    height: 30px;
-}
-
-.form-for-clean{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
+    height: 45px;
+    border: 1px solid #333;
     color: #F3F1F1;
     font-family: Montserrat;
     font-size: 18px;
 }
-.form-for-clean span{
-    margin-right: 10px;
+
+.select_meals:active, .select_meals:hover, .select_meals:focus{
+    outline: 0;
 }
+
 .container-button-request{
     margin-top: 20px;
 }
 .btn-request{
+    background-color: #121212;
+    border: 1px solid #7f7f7f;
     width: 100%;
     height: 50px;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    transition: background-color 0.3s ease-in-out;
+}
+.btn-request:hover{
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /**/
@@ -193,7 +214,7 @@
 .form-for-btn-cancel{
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
 }
 .btn-cancel{
     width: 30px;
@@ -210,7 +231,122 @@
     width: 100%;
 }
 
-input.red-background::-webkit-calendar-picker-indicator,
-input.red-background::-webkit-inner-spin-button {
-    background-color: red;
+.minimal-datepicker {
+    border: none;
+    box-shadow: none;
+    color: #333;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+}
+.react-datepicker__input-container input{
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    transition: border 0.3s ease-in-out;
+}
+.react-datepicker__input-container input:active, .react-datepicker__input-container input:hover, .react-datepicker__input-container input:focus{
+    outline: 0;
+}
+.react-datepicker__input-container input:hover, .react-datepicker__input-container input:focus{
+    border: 1px solid #DFBF5E;
+}
+
+.cost{
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 0;
+    font-size: 18px;
+    color: #F3F1F1;
+
+}
+
+.cost-name{
+    margin-right: 10px;
+}
+
+/*//модальное окно//*/
+
+.name-header-form{
+    font-size: 25px;
+    font-family: Montserrat;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.input-form-ones{
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+
+}
+.input-form-ones input{
+    height: 35px;
+    font-size: 15px;
+    font-family: Montserrat;
+}
+.input-form-pay{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2px;
+}
+.input-form-ones-pay{
+    display: flex;
+    font-size: 16px;
+    font-family: Montserrat;
+    justify-content: space-around;
+    align-items: center;
+}
+.input-form-ones-pay label{
+    margin-right: 10px;
+}
+.input-form-ones-pay input{
+    width: 15px;
+}
+
+.input-form-ones input:active, .input-form-ones input:hover, .input-form-ones input:focus{
+    outline: 0;
+}
+.input-form-ones-label{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    font-family: Montserrat;
+}
+.btn-request-form{
+    margin-top: 15px;
+    background-color: #121212;
+    border: 1px solid #7f7f7f;
+    width: 100%;
+    height: 50px;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    transition: background-color 0.3s ease-in-out;
+}
+.btn-request-form:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #121212;
+}
+
+
+/**/
+.modal-form-info{
+    width: 100%;
+}
+
+.modal-form-info span{
+    display: block;
+    width: 100%;
+    text-align: justify;
+    margin-bottom: 10px;
+    font-family: Montserrat;
+}
+
+.first-text-info{
+    margin-top: 20px;
+}
+
+.last-text-info{
+    margin-top: 70px;
 }
