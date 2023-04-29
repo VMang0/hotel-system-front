@@ -4,13 +4,13 @@ import {Link, useNavigate} from 'react-router-dom';
 import { AuthContext } from "../../contexts/authContext";
 import "./Login.css";
 import { FaInstagram , FaGithubAlt, FaTelegramPlane, FaTwitter} from 'react-icons/fa';
+import {toast} from "react-toastify";
 
 export function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const { setAuthData } = useContext(AuthContext);
+    const {setAuthData } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,13 +19,14 @@ export function Login(){
                 email,
                 password,
             });
-            console.log(response.data);
+
             localStorage.setItem('user', JSON.stringify(response.data));
             setAuthData(response.data);
+            toast.success('Добро пожаловать!');
             navigate('/');
+            console.log(response.status)
         } catch (error) {
-            alert("Проверьте введнный email или пароль!")
-            setError(error.response.data.message);
+            toast.error('Проверьте корректность введенных данных!');
         }
     };
 

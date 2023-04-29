@@ -4,6 +4,7 @@ import './Nav.css';
 import {Link} from "react-router-dom";
 import { useLocation  } from 'react-router-dom';
 import { AuthContext } from "../contexts/authContext";
+import {SlUser} from "react-icons/sl";
 export function Nav() {
     const { authData, setAuthData } = useContext(AuthContext);
     const [activeLink, setActiveLink] = useState("");
@@ -61,17 +62,25 @@ export function Nav() {
             <nav className="navbar">
                 <div className="left_navbar">
                     <ul className="list_icon">
-                        <li><p className="link_style">+375(44)7339153</p></li>
-                        <li><button className="icon_btn instagram"  aria-label="Instagram"><FaInstagram /></button></li>
-                        <li><button className="icon_btn github"  aria-label="GitHub"><FaGithubAlt /></button></li>
-                        <li><button className="icon_btn telegram"  aria-label="Telegram"><FaTelegramPlane /></button></li>
+                        <li><span className="link_style">+375(44)7339153</span></li>
+                        <li><Link className="icon_btn instagram"  aria-label="Instagram"><FaInstagram /></Link></li>
+                        <li><Link className="icon_btn github"  aria-label="GitHub"><FaGithubAlt /></Link></li>
+                        <li><Link className="icon_btn telegram"  aria-label="Telegram"><FaTelegramPlane /></Link></li>
                     </ul>
                 </div>
                 <Link className="center_navbar" to = "/"><p className="white_text">VMANGO</p></Link>
-                <div className="right_navbar">
-                        <div className="right_navbar">
+                <div className={`right_navbar ${authData && authData.roles[0] === "USER" ? "user-active" : "other"}`}>
+                    {
+                        authData && authData.roles[0] === "USER" ? (
+                                <div className="account">
+                                    <Link to = "/personal-account" className="icon-account"><SlUser/></Link>
+                                    <span>Личный кабинет</span>
+                                </div>
+                        ): ""
+                    }
+                        <div className="form-for-btn">
                             {authData
-                                ? <Link className="btn btn-5" onClick={handleLogout}>Log out</Link>
+                                ? <Link className="btn btn-5" onClick={handleLogout}>Logout</Link>
                                 : <Link className="btn btn-5" to="/loginuser">Log in</Link>
                             }
                         </div>
