@@ -7,3 +7,21 @@
     border: 1px solid;
     width: 50px;
 }
+
+.btn-edit-meal{
+    width: 50px;
+    height: 27px;
+    border: 1px solid #DFBF5E;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #121212;
+    color: #DFBF5E;
+    transition: background-color 0.3s ease;
+}
+.btn-edit-meal:hover{
+    background-color: #DFBF5E;
+    color: #121212;
+}
