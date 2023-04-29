@@ -1,0 +1,9 @@
+.table-service{
+    margin-top: 20px;
+}
+
+.table-service input{
+    background-color: #121212;
+    border: 1px solid;
+    width: 50px;
+}
