@@ -90,6 +90,10 @@ export default function AddRoom() {
                 <form onSubmit={(e) => onSubmit(e)} encType="multipart/form-data">
                     <div className="form-create">
                         <div className="form-create-ones">
+                            <div className="text-add-room"><label>Название</label></div>
+                            <input maxLength="67" type="text" value={name} placeholder="название" onChange={(e) => onInputChange(e)} name="name" required/>
+                        </div>
+                        <div className="form-create-ones">
                             <div className="text-add-room"><label>Тип номера</label></div>
                             <select value={type_room} className="select-add-room" onChange={(e) => onInputChange(e)} name="type_room" required>
                                 <option>Choose</option>
@@ -126,18 +130,14 @@ export default function AddRoom() {
                            <div className="text-add-room"><label>Стоимость на 1-го</label></div>
                            <input type="number" value={cost} placeholder="цена" onChange={(e) => onInputChange(e)} name="cost" required/>
                        </div>
-                       <div className="form-create-ones">
-                           <div className="text-add-room"><label>Описание</label></div>
-                           <textarea maxLength="380" value={description} placeholder="текст" onChange={(e) => onInputChange(e)} name="description" required/>
-                       </div>
                         <div className="form-create-ones">
                             <div className="text-add-room"><label>Площадь</label></div>
                             <input type="number" value={square} placeholder="площадь" onChange={(e) => onInputChange(e)} name="square" required/>
                         </div>
-                        <div className="form-create-ones">
-                            <div className="text-add-room"><label>Название</label></div>
-                            <input maxLength="67" type="text" value={name} placeholder="название" onChange={(e) => onInputChange(e)} name="name" required/>
-                        </div>
+                       <div className="form-create-ones">
+                           <div className="text-add-room"><label>Описание</label></div>
+                           <textarea maxLength="380" value={description} placeholder="текст" onChange={(e) => onInputChange(e)} name="description" required/>
+                       </div>
                     </div>
                     {/*<Dropzone onDrop={onDrop}>
                         {({getRootProps, getInputProps}) => (
