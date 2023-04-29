@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import "./EditManager.css"
+import {HiOutlineArrowLeft} from "react-icons/hi";
+import {toast} from "react-toastify";
 
 export default function EditManager() {
     let navigate = useNavigate();
@@ -26,6 +28,7 @@ export default function EditManager() {
     const onSubmit = async (e) => {
         e.preventDefault();
         await axios.put(`http://localhost:8080/user/${id}`, {...user, roles: [user.roles]});
+        toast.success('Вы успешно изменили данные менеджера!');
         navigate("/admin/dashboard-manager");
     };
 
@@ -36,28 +39,37 @@ export default function EditManager() {
     };
 
     return (
-        <div className= "container-edit-manager">
-            <div className= "container-edit-manager-window">
-                <div className= "form-edit">
-                    <h3 className= "text-center m-3 ">Edit User</h3>
-                    <form onSubmit={(e) => onSubmit(e)}>
-                        <div className="input-container">
-                            <input type= "email" className= "form-control" placeholder="Email" name = "email"
-                                   value={email} onChange={(e)=> onInputChange(e)} required/>
-                            <label className="form-label">Email</label>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Role" className="form-label"> Role </label>
-                            <select className="form-select" name="roles" value={roles} onChange={(e) => onInputChange(e)}>
-                                <option value="USER">User</option>
-                                <option value="MANAGER">Manager</option>
-                            </select>
-                        </div>
-                        <button type="submit" className= "btn btn-outline-primary">Submit</button>
-                        <Link  className= "btn btn-danger mx-2" to = "/admin/dashboard-manager">Cancel</Link>
-                    </form>
+        <div>
+            <div className="name-page"><span>Редактирование менеджера</span></div>
+            <div className= "container-edit-manager">
+                <div className= "container-edit-manager-window">
+                    <div className="form-for-cancel">
+                        <button className= "btn-cancel-add-manager" onClick={()=> navigate("/admin/dashboard-manager")}><HiOutlineArrowLeft/></button>
+                    </div>
+                    <div className= "form-add">
+                        <form onSubmit={(e) => onSubmit(e)}>
+                            <div className="input-login">
+                                <input type= "email"
+                                       className= "form_login"
+                                       placeholder="Email"
+                                       name = "email"
+                                       value={email}
+                                       onChange={(e)=> onInputChange(e)}
+                                       required/>
+                                <label className="label-input">Email</label>
+                            </div>
+                            <div className="select-form">
+                                <select className="select-form-child" name="roles" value={roles} onChange={(e) => onInputChange(e)}>
+                                    <option value="USER">User</option>
+                                    <option value="MANAGER">Manager</option>
+                                </select>
+                            </div>
+                            <button type="submit" className= "btn-add-manager">Изменить</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
     )
 }
