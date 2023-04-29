@@ -1,0 +1,53 @@
+.main-form-personal-account{
+}
+.main-form{
+    display: flex;
+    height: 550px;
+}
+
+.account-main-part{
+    width: 74%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.account-panel{
+    width: 26%;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+}
+.account-panel-list-form{
+    width: 100%;
+}
+.account-panel-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    padding: 0;
+    margin-top: 30px;
+    margin-left: 3px;
+}
+
+.account-panel-list li{
+    margin-bottom: 25px;
+}
+.account-panel-list a{
+    text-decoration: none;
+    color: #B3B3B3;
+    font-family: Montserrat;
+    font-size: 18px;
+}
+
+.account-panel-list a:hover{
+    border-bottom: 1px solid #DFBF5E;
+}
+
+.window-edit-account{
+    width: 400px;
+}
+
+.active-link{
+    border-bottom: 1px solid #DFBF5E;
+}
