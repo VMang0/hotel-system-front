@@ -1,7 +1,100 @@
-.form-create{
-    min-height: 600px;
-    width: 100%;
+.form-add-room{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
 }
-select{
-    width: 150px;
+
+.form-add-room form{
+    width: 40%;
+}
+.select-add-room{
+    background-color: #121212;
+    color: #7f7f7f;
+}
+.form-create-ones{
+    margin-bottom: 20px;
+}
+.form-create-ones input,
+.form-create-ones select{
+    width: 100%;
+    height: 40px;
+    font-family: Montserrat;
+    background-color: #121212;
+    color: #7f7f7f;
+    border: 1px solid;
+}
+
+.form-create-ones textarea{
+    width: 100%;
+    height: 200px;
+    font-family: Montserrat;
+    background-color: #121212;
+    color: #7f7f7f;
+    border: 1px solid;
+}
+
+.form-create-ones li{
+    margin-bottom: 10px;
+}
+.text-add-room{
+    display: flex;
+    justify-content: flex-start;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    font-size: 12px;
+}
+
+.form-create-ones input:active,
+.form-create-ones input:hover,
+.form-create-ones input:focus,
+.form-create-ones select:active,
+.form-create-ones select:hover,
+.form-create-ones select:focus,
+.form-create-ones textarea:active,
+.form-create-ones textarea:hover,
+.form-create-ones textarea:focus{
+    outline: 0;
+    border: 1px solid #DFBF5E;
+}
+
+.dropfiles{
+    width: 100%;
+    background-color: #121212;
+}
+
+.btn-add-room{
+    margin-top: 15px;
+    margin-bottom: 35px;
+    width: 100%;
+    height: 50px;
+    background-color: #121212;
+    color: #F3F1F1;
+    font-family: Montserrat;
+    border: 1px solid;
+    font-size: 17px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-room:hover{
+    background-color: #b0b0b0;
+    color: #121212;
+}
+
+.form-create-ones ul{
+    list-style: none;
+}
+
+.btn-delete-img{
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #990000;
+}
+
+.form-for-img{
+    width: 125px;
+    display: flex;
+    justify-content: inherit;
 }
