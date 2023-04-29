@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import {FaGithubAlt, FaInstagram, FaTelegramPlane, FaTwitter} from "react-icons/fa";
 import "./Registration.css"
+import {toast} from "react-toastify";
 export default function Registration() {
     let navigate = useNavigate();
     const [user, setUser] = useState({
@@ -22,51 +23,60 @@ export default function Registration() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!codeSent) {
-            alert('Please get verification code first.');
+            toast.error('Сначала вам требутся получить код потверждения!');
             return;
         }
         if (!email || !password || !verificationCode) {
-            alert('Please enter all required information.');
+            toast.error('Заполните все поля!');
             return;
         }
         try {
             const response = await axios.post('http://localhost:8080/registration', user);
             if (response.status === 200) {
-                alert('User registered successfully!');
+                toast.success('Регистрация прошла успешно!');
                 navigate('/');
             }
         } catch (error) {
-            alert('Registration failed. Please try again later.');
+            if (error.response.status === 409) {
+                toast.error('Пользователь с таким email уже существует!');
+            }else{
+                toast.error('Регистрация не успешна. Пожалуйста, попробуйте через несколько минут!');
+            }
             console.error(error);
         }
     };
 
     const sendVerificationCode = async () => {
         if (!email) {
-            alert('Please enter email address.');
+            toast.error('Пожалуйста введите email!');
             return;
         }
         try {
             await axios.post('http://localhost:8080/send-code', {email});
             setCodeSent(true);
         } catch (error) {
-            alert('Failed to send verification code. Please try again later.');
+            if (error.response.status === 400) {
+                toast.error('Пользователь с таким email уже существует!');
+            }else{
+                toast.error('Не можем отправить код для потверждения. Пожалуйста попробуйте снова позже!');
+            }
             console.error(error);
         }
     };
 
         const verifyCode = async () => {
             if (!verificationCode) {
-               alert('Please enter verification code.');
+                toast.error('Пожалуйста введите код потверждения!');
                 return;
             }
             try {
                 const response = await axios.post('http://localhost:8080/verify-code', { email, verificationCode });
                 if (response.status === 200) {
+                    toast.success('Код потвержден!');
                     setVer_success(true);
                 }
             } catch (error) {
-                alert('Verification failed. Please try again later.');
+                toast.error('Код не потвержден. Попробуйте снова!');
                 setVer_success(false)
                 console.error(error);
             }
