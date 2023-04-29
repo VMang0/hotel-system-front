@@ -26,6 +26,16 @@
     color: #F3F1F1;
     font-size: 15px;
     font-family: Montserrat;
+    margin-right: 15px;
+}
+
+.form-for-input-search select{
+    width: 150px;
+    background-color: #121212;
+    border: 1px solid #DFBF5E;
+    color: #F3F1F1;
+    font-size: 15px;
+    font-family: Montserrat;
 }
 
 .form-for-input-search input:active, .form-for-input-search input:hover, .form-for-input-search input:focus{

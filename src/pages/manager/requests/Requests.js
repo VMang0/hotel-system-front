@@ -14,6 +14,7 @@ export default function Requests() {
     const [showBackFon, setShowBackFon] = useState(false);
     const [selectedReservation, setSelectedReservation] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedOption, setSelectedOption] = useState("all");
 
     const loadreserv = async ()=> {
         axios.get("http://localhost:8080/list/reservations")
@@ -89,21 +90,27 @@ export default function Requests() {
     };
 
     const filteredReservations = reservations.filter((reservation) =>{
-        return (
-            reservation.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.lastname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.patronymic.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.room.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.status.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.payment.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.type_meal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            reservation.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+        const isNameMatch = reservation.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const isLastNameMatch = reservation.lastname.toLowerCase().includes(searchQuery.toLowerCase());
+        const isPatronymicMatch = reservation.patronymic.toLowerCase().includes(searchQuery.toLowerCase());
+        const isRoomMatch = reservation.room.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const isStatusMatch = reservation.status.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const isPaymentMatch = reservation.payment.toLowerCase().includes(searchQuery.toLowerCase());
+        const isTypeMealMatch = reservation.type_meal.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const isPhoneNumberMatch = reservation.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase());
+        const today = new Date();
+        const isToday = reservation.enddate === `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`;
+        const tomorrow = new Date(today.getTime() + 86400000);
+        const isTomorrow = reservation.enddate === `${tomorrow.getFullYear()}-${('0' + (tomorrow.getMonth() + 1)).slice(-2)}-${('0' + tomorrow.getDate()).slice(-2)}`;
+        if (selectedOption === "today") {
+            return isToday && (isNameMatch || isLastNameMatch || isPatronymicMatch || isRoomMatch || isStatusMatch || isPaymentMatch || isTypeMealMatch || isPhoneNumberMatch);
+        } else if (selectedOption === "tomorrow") {
+            return isTomorrow && (isNameMatch || isLastNameMatch || isPatronymicMatch || isRoomMatch || isStatusMatch || isPaymentMatch || isTypeMealMatch || isPhoneNumberMatch);
+        } else {
+            return isNameMatch || isLastNameMatch || isPatronymicMatch || isRoomMatch || isStatusMatch || isPaymentMatch || isTypeMealMatch || isPhoneNumberMatch;
+        }
     });
 
-    const [path, setPath] = useState('')
-
-    console.log(path);
     return (
         <div className= "container_manager" style={{ minHeight: '100vh' }}>
             {showBackFon && <BackFon show={showBackFon} clicked={handleCancelDelete}></BackFon>}
@@ -111,6 +118,11 @@ export default function Requests() {
             <div className= "manager_table">
                 <div className="form-for-input-search">
                     <input type="text" value={searchQuery} onChange={handleSearch} placeholder="Поиск..."/>
+                    <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+                        <option value="all">Все</option>
+                        <option value="today">Сегодня</option>
+                        <option value="tomorrow">Завтра</option>
+                    </select>
                 </div>
                 <div className="request_table">
                         <table className="table border shadow">
