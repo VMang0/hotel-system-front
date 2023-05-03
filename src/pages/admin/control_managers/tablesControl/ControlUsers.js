@@ -4,6 +4,7 @@ import BackFon from "../backfon/BackFon";
 import useTable from "./table/useTable";
 import TableFooter from "./table/TableFooter";
 import {FaUserMinus} from "react-icons/fa";
+import {toast} from "react-toastify";
 
 export default function ControlUsers() {
     const [users, setUsers] = useState([])
@@ -32,11 +33,20 @@ export default function ControlUsers() {
     };
 
     const handleConfirmDelete = async () => {
-        await axios.delete(`http://localhost:8080/user/${selectedUser}`);
-        setSelectedUser(null);
-        setShowModal(false);
-        setShowBackFon(false);
-        loadUsers();
+       await axios.delete(`http://localhost:8080/user/${selectedUser}`)
+            .then(response =>{
+                setSelectedUser(null);
+                setShowModal(false);
+                setShowBackFon(false);
+                loadUsers();
+            })
+           .catch(error =>{
+               toast.error('Пользователь не может быть удален. Существуют текущие брони!');
+               setSelectedUser(null);
+               setShowModal(false);
+               setShowBackFon(false);
+           });
+
     };
 
     const handleCancelDelete = () => {

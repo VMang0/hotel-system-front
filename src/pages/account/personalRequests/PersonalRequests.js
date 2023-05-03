@@ -157,7 +157,7 @@ export default function PersonalRequests(){
                             <th scope="col">Взрослые</th>
                             <th scope="col">Дети</th>
                             <th scope="col">Питание</th>
-                            <th scope="col">Стоимость $</th>
+                            <th scope="col">Стоимость</th>
                             <th scope="col">Вид оплаты</th>
                             <th scope="col">Дата брони</th>
                             <th scope="col">Статус</th>

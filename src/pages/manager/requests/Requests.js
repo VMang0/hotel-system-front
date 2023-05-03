@@ -184,7 +184,7 @@ export default function Requests() {
                                                 <td>
                                                     <button className= "btn-request-table delete-request" onClick={()=> deleteReservation(reservations.id)}><MdDelete/></button>
                                                 </td>
-                                            ) :  reservations.status.name === "Потверждена" ? (
+                                            ) :  reservations.status.name === "Подтверждена" ? (
                                                         <td>
                                                             <button className= "btn-request-table dogovor-request" onClick={()=> handleCreateContract(reservations.id)}><HiDocumentText/></button>
                                                         </td>
