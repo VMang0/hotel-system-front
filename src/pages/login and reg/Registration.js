@@ -72,11 +72,11 @@ export default function Registration() {
             try {
                 const response = await axios.post('http://localhost:8080/verify-code', { email, verificationCode });
                 if (response.status === 200) {
-                    toast.success('Код потвержден!');
+                    toast.success('Код подтвержден!');
                     setVer_success(true);
                 }
             } catch (error) {
-                toast.error('Код не потвержден. Попробуйте снова!');
+                toast.error('Код не подтвержден. Попробуйте снова!');
                 setVer_success(false)
                 console.error(error);
             }

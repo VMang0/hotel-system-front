@@ -11,6 +11,7 @@ import BackFon from "../../../admin/control_managers/backfon/BackFon";
 import {AuthContext} from "../../../../contexts/authContext";
 import useTable from "../../../admin/control_managers/tablesControl/table/useTable";
 import TableFooter from "../../../admin/control_managers/tablesControl/table/TableFooter";
+import {toast} from "react-toastify";
 export default function AllRooms(){
 
     const [rooms, setRoom] = useState([]);
@@ -60,11 +61,21 @@ export default function AllRooms(){
     };
 
     const handleConfirmDelete = async () => {
-        await axios.delete(`http://localhost:8080/room/${selectedRoom}`);
-        setSelectedRoom(null);
-        setShowModal(false);
-        setShowBackFon(false);
-        LoadRooms();
+        await axios.delete(`http://localhost:8080/room/${selectedRoom}`)
+            .then(response =>{
+                setSelectedRoom(null);
+                setShowModal(false);
+                setShowBackFon(false);
+                LoadRooms();
+                toast.success('Номер успешно удален!');
+            })
+            .catch(error =>{
+                toast.error('Номер не может быть удален. Существуют текущие брони!');
+                setSelectedRoom(null);
+                setShowModal(false);
+                setShowBackFon(false);
+            });
+
     };
 
     const handleCancelDelete = () => {
